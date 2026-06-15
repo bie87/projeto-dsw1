@@ -1,5 +1,5 @@
 
-package br.ufscar.dc.dsw.controller;
+package br.ufscar.dc.dsw1.controller;
 
 import br.ufscar.dc.dsw.domain.Loja;
 import br.ufscar.dc.dsw.service.spec.ILojaService;

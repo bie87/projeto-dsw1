@@ -1,4 +1,4 @@
-package br.ufscar.dc.dsw.controller;
+package br.ufscar.dc.dsw1.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,8 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import br.ufscar.dc.dsw.domain.Veiculo;
-import br.ufscar.dc.dsw.service.spec.IVeiculoService;
+import br.ufscar.dc.dsw1.domain.Veiculo;
+import br.ufscar.dc.dsw1.service.spec.IVeiculoService;
 
 import jakarta.validation.Valid;
 

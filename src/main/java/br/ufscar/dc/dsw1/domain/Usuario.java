@@ -1,3 +1,6 @@
+
+package br.ufscar.dc.dsw1.domain;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
