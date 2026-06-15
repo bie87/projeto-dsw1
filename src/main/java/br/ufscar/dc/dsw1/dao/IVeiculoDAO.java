@@ -18,6 +18,10 @@ public interface IVeiculoDAO extends CrudRepository<Veiculo, Long> {
 	Veiculo save(Veiculo veiculo);
 
 	void deleteById(Long id);
+
+	List<Veiculo> findByLojaId(Long lojaId);
+	
+	 List<Veiculo> findByModeloContainingIgnoreCase(String modelo);
 	
     @Query("SELECT c FROM Veiculo c WHERE c.nome = :nome")
     public Veiculo getVeiculoByNome(@Param("nome") String nome);

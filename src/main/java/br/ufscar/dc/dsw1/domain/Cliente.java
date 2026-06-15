@@ -17,28 +17,24 @@ public class Cliente extends AbstractEntity<Long> {
     @Column(nullable = false, length = 60)
     private String nome;
     
-	@Column(nullable = false, length = 60)
-     private String email;
 
-	@Column(nullable = false,length = 60)
-	private String senha;
   //  @NotBlank
     @Column(nullable = false, length = 14)
     private String CPF;
 
 	@Column(nullable = false,length = 13)
-	private int telefone;
+	private String telefone;
 	
 	@Column(nullable = false,length =20)
-	private String data_nascimento;
+	private LocalDate data_nascimento;
 
    @Column(nullable = false,length =10)
 	private String sexo;
 
+	 @OneToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
-	@ManyToOne
-	@JoinColumn(name = "loja-id")
-	private Loja loja; 
 	public String getNome() {
 		return nome;
 	}

@@ -6,6 +6,9 @@ import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.JoinColumn;
+
 import jakarta.persistence.Table;
 //import jakarta.validation.constraints.NotBlank;
 //import jakarta.validation.constraints.Size;
@@ -17,11 +20,6 @@ import jakarta.persistence.Table;
 @Table(name = "Loja")
 public class Loja extends AbstractEntity<Long> {
 
-    @Column(nullable = false, length = 60)
-    private String email;
-
-	@Column(nullable = false,length = 60)
-	private String senha;
 
 //	@UniqueCNPJ (message = "{Unique.loja.CNPJ}")
 //	@NotBlank
@@ -36,12 +34,13 @@ public class Loja extends AbstractEntity<Long> {
 
 	@Column(nullable = false,length = 60)
 	private String descricao;
-
-	@OneToMany(mappedBy = "loja")
-	private List<Cliente> clientes;
 	
 	@OneToMany(mappedBy = "loja")
     private List<Veiculo> veiculos;
+
+    @OneToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
 	public String getCNPJ() {
 		return CNPJ;
@@ -59,12 +58,12 @@ public class Loja extends AbstractEntity<Long> {
 		this.nome = nome;
 	}
 
-	public List<Cliente> getClientes() {
-		return clientes;
+	public List<Veiculo> getVeiculos() {
+		return Veiculos;
 	}
 
-	public void setClientes(List<Cliente> clientes) {
-		this.clientes = clientes;
+	public void setClientes(List<Veiculos> Veiculos) {
+		this.Veiculos = Veiculos;
 	}
 
 }

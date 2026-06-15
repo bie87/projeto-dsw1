@@ -71,6 +71,6 @@ public class Veiculo extends AbstractEntity<Long> {
 	}
 
    @ManyToOne
-   @JoinColumn(name = "loja-id")
+   @JoinColumn(name = "loja_id")
     private Loja loja; 
 }
