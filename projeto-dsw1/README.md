@@ -1,0 +1,3 @@
+Sistema de compra/venda de veículos
+
+Professor meu computador quebrou e estou usando outro,não consegui(não posso) baixar as atualizações para rodar o programa,o meu computador esta no conserto,ate essa semana eu recupero ele,como achei que o concerto ia ser rapido,demorei para ir atras de outro computado,por isso fui ruim nessas duas entregas,estou me justificando por causa das futuras entregas,vou correr atras porque estou atrasado
