@@ -9,11 +9,11 @@ import org.springframework.data.repository.query.Param;
 import br.ufscar.dc.dsw1.domain.Loja;
 
 @SuppressWarnings("unchecked")
-public interface IlojaDAO extends CrudRepository<Loja, Long>{
+public interface ILojaDAO extends CrudRepository<Loja, Long>{
+
+	Loja findByUsuarioEmail(String email);
 
 	Loja findById(long id);
-	
-	Loja findByCNPJ (String CNPJ);
 
 	List<Loja> findAll();
 	
@@ -21,6 +21,6 @@ public interface IlojaDAO extends CrudRepository<Loja, Long>{
 
 	void deleteById(Long id);
 
-	 @Query("SELECT j FROM Loja j WHERE j.nome = :nome")
+	@Query("SELECT j FROM Loja j WHERE j.nome = :nome")
     public Loja getLojaByNome(@Param("nome") String nome);
 }

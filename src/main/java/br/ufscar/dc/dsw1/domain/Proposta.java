@@ -1,7 +1,12 @@
 package br.ufscar.dc.dsw1.domain;
 
+import java.time.LocalDate;
+
+import br.ufscar.dc.dsw1.enums.StatusProposta;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -28,5 +33,35 @@ public class Proposta extends AbstractEntity<Long> {
     @JoinColumn(name = "veiculo_id")
     private Veiculo veiculo;
 
-    // getters e setters
+    public Double getValor() {
+        return valor;
+    }
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
+    public LocalDate getData() {
+        return data;
+    }   
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
+    public StatusProposta getStatus() {
+        return status;
+    }
+    public void setStatus(StatusProposta status) {
+        this.status = status;
+    }
+    public Cliente getCliente() {
+        return cliente;
+    }
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
+    }
+    
 }

@@ -1,6 +1,6 @@
-package br.ufscar.dc.dsw.enums;
+package br.ufscar.dc.dsw1.enums;
 
-public enum StatusProposta {
+public enum StatusProposta{
   ABERTO,
   ACEITO,
  NAO_ACEITO

@@ -4,25 +4,25 @@ package br.ufscar.dc.dsw1.domain;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
+//import jakarta.validation.constraints.NotBlank;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Usuario")
 public class Usuario extends AbstractEntity<Long> {
   
-	@NotBlank
-    @Column(nullable = false, length = 20, unique = true)
+	//@NotBlank
+    @Column(nullable = false, length = 60, unique = true)
     private String email;
     
-	@NotBlank
+	//@NotBlank
     @Column(nullable = false, length = 64)
     private String password;
        
    
     
-    @NotBlank
-    @Column(nullable = false, length = 10)
+    //@NotBlank
+    @Column(nullable = false, length = 20)
     private String role;
     
     @Column(nullable = false)

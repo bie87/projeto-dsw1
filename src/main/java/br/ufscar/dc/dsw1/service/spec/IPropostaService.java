@@ -1,10 +1,9 @@
-```java
-package br.ufscar.dc.dsw.service.spec;
+package br.ufscar.dc.dsw1.service.spec;
 
 import java.util.List;
 
-import br.ufscar.dc.dsw.domain.Proposta;
-import br.ufscar.dc.dsw.enums.StatusProposta;
+import br.ufscar.dc.dsw1.domain.Proposta;
+import br.ufscar.dc.dsw1.enums.StatusProposta;
 
 public interface IPropostaService {
 
@@ -14,12 +13,12 @@ public interface IPropostaService {
 
     Proposta buscarPorId(Long id);
 
-    List<Proposta> buscarTodos();
+    Iterable<Proposta> buscarTodos();
 
-    List<Proposta> buscarPorCliente(Long clienteId);
+    Iterable<Proposta> buscarPorCliente(Long clienteId);
 
-    List<Proposta> buscarPorVeiculo(Long veiculoId);
+    Iterable<Proposta> buscarPorVeiculo(Long veiculoId);
 
-    List<Proposta> buscarPorStatus(StatusProposta status);
+    Iterable<Proposta> buscarPorStatus(StatusProposta status);
 }
-```
+

@@ -1,19 +1,16 @@
 package br.ufscar.dc.dsw1.dao;
 
-import java.util.List;
-
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
-import br.ufscar.dc.dsw.domain.Proposta;
-import br.ufscar.dc.dsw.enums.StatusProposta;
+import br.ufscar.dc.dsw1.domain.Proposta;
+import br.ufscar.dc.dsw1.enums.StatusProposta;
 
 
 public interface IPropostaDAO extends CrudRepository<Proposta, Long> {
 
-    List<Proposta> findByClienteId(Long id);
+    Iterable<Proposta> findByClienteId(Long id);
 
-    List<Proposta> findByVeiculoId(Long id);
+    Iterable<Proposta> findByVeiculoId(Long id);
 
-    List<Proposta> findByStatus(StatusProposta status);
+    Iterable<Proposta> findByStatus(StatusProposta status);
 }

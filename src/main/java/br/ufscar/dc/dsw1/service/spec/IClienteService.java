@@ -1,8 +1,8 @@
-package br.ufscar.dc.dsw.service.spec;
+package br.ufscar.dc.dsw1.service.spec;
 
 import java.util.List;
 
-import br.ufscar.dc.dsw.domain.Cliente;
+import br.ufscar.dc.dsw1.domain.Cliente;
 
 public interface IClienteService {
 

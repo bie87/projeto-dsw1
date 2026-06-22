@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área do Cliente</title>
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; background: #f4f6f8; color: #1f2937; }
+        .topbar { background: #111827; color: #fff; padding: 20px 24px; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+        .actions { display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0 24px; }
+        .actions a, .actions button { display: inline-block; border: 0; border-radius: 8px; padding: 10px 14px; text-decoration: none; font-size: 14px; cursor: pointer; }
+        .primary { background: #2563eb; color: #fff; }
+        .secondary { background: #e5e7eb; color: #111827; }
+        .search { background: #fff; padding: 16px; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,.06); margin-bottom: 24px; }
+        input { width: min(100%, 320px); padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 8px; margin-right: 8px; }
+        table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,.06); }
+        th, td { padding: 14px; border-bottom: 1px solid #e5e7eb; text-align: left; }
+        th { background: #f9fafb; }
+        .empty { background: #fff; border-radius: 12px; padding: 18px; box-shadow: 0 8px 24px rgba(0,0,0,.06); }
+    </style>
+</head>
+<body>
+<header class="topbar">
+    <div class="container">
+        <h1>Área do Cliente</h1>
+        <p>Bem-vindo, <span th:text="${cliente.nome}"></span>.</p>
+    </div>
+</header>
+
+<main class="container">
+    <div class="actions">
+        <a class="primary" th:href="@{/cliente/propostas/minhas}">Minhas propostas</a>
+        <a class="secondary" th:href="@{/logout}">Sair</a>
+    </div>
+
+    <section class="search">
+        <form th:action="@{/cliente/home}" method="get">
+            <label for="modelo">Filtrar por modelo</label><br><br>
+            <input type="text" id="modelo" name="modelo" placeholder="Digite o modelo">
+            <button class="secondary" type="submit">Filtrar</button>
+        </form>
+    </section>
+
+    <section th:if="${veiculos == null or #lists.isEmpty(veiculos)}" class="empty">
+        Nenhum veículo cadastrado no momento.
+    </section>
+
+    <table th:if="${veiculos != null and !#lists.isEmpty(veiculos)}">
+        <thead>
+        <tr>
+            <th>Modelo</th>
+            <th>Ano</th>
+            <th>Preço</th>
+            <th>Loja</th>
+            <th>Ação</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="veiculo : ${veiculos}">
+            <td th:text="${veiculo.modelo}"></td>
+            <td th:text="${veiculo.ano}"></td>
+            <td th:text="${veiculo.preco}"></td>
+            <td th:text="${veiculo.loja != null ? veiculo.loja.nome : '-'}"></td>
+            <td>
+                <a class="primary" th:href="@{/cliente/propostas/nova/{id}(id=${veiculo.id})}">Fazer proposta</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

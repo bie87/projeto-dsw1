@@ -70,6 +70,30 @@ public class Veiculo extends AbstractEntity<Long> {
 		this.preco = preco;
 	}
 
+	public String getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
+	}
+
+	public String getChassi() {
+		return chassi;
+	}
+
+	public void setChassi(String chassi) {
+		this.chassi = chassi;
+	}
+
+	public Loja getLoja() {
+		return loja;
+	}
+
+	public void setLoja(Loja loja) {
+		this.loja = loja;
+	}
+
    @ManyToOne
    @JoinColumn(name = "loja_id")
     private Loja loja; 

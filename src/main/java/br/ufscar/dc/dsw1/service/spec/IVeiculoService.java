@@ -1,9 +1,9 @@
-```java
-package br.ufscar.dc.dsw.service.spec;
+
+package br.ufscar.dc.dsw1.service.spec;
 
 import java.util.List;
 
-import br.ufscar.dc.dsw.domain.Veiculo;
+import br.ufscar.dc.dsw1.domain.Veiculo;
 
 public interface IVeiculoService {
 
@@ -19,4 +19,4 @@ public interface IVeiculoService {
 
     List<Veiculo> buscarPorModelo(String modelo);
 }
-```
+

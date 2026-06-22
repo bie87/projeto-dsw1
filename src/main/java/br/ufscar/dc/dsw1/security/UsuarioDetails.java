@@ -1,3 +1,5 @@
+package br.ufscar.dc.dsw1.security;
+
 import java.util.Arrays;
 import java.util.Collection;
  
@@ -5,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import br.ufscar.dc.dsw.domain.Usuario;
+import br.ufscar.dc.dsw1.domain.Usuario;
  
 @SuppressWarnings("serial")
 public class UsuarioDetails implements UserDetails {

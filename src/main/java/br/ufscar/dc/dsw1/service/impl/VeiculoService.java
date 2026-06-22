@@ -1,14 +1,14 @@
-```java
-package br.ufscar.dc.dsw.service.impl;
+
+package br.ufscar.dc.dsw1.service.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.ufscar.dc.dsw.dao.IVeiculoDAO;
-import br.ufscar.dc.dsw.domain.Veiculo;
-import br.ufscar.dc.dsw.service.spec.IVeiculoService;
+import br.ufscar.dc.dsw1.dao.IVeiculoDAO;
+import br.ufscar.dc.dsw1.domain.Veiculo;
+import br.ufscar.dc.dsw1.service.spec.IVeiculoService;
 
 @Service
 public class VeiculoService implements IVeiculoService {
@@ -46,4 +46,4 @@ public class VeiculoService implements IVeiculoService {
         return dao.findByModeloContainingIgnoreCase(modelo);
     }
 }
-```
+

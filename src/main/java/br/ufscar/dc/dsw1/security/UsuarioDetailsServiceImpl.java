@@ -1,17 +1,21 @@
-package
+package br.ufscar.dc.dsw1.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import br.ufscar.dc.dsw.dao.IUsuarioDAO;
-import br.ufscar.dc.dsw.domain.Usuario;
+import br.ufscar.dc.dsw1.dao.IUsuarioDAO;
+import br.ufscar.dc.dsw1.domain.Usuario;
  
+@Service
 public class UsuarioDetailsServiceImpl implements UserDetailsService {
- 
-    @Autowired
-    private IUsuarioDAO dao;
+
+    private final IUsuarioDAO dao;
+
+    public UsuarioDetailsServiceImpl(IUsuarioDAO dao) {
+        this.dao = dao;
+    }
      
     @Override
     public UserDetails loadUserByUsername(String email)

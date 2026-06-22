@@ -10,6 +10,8 @@ import br.ufscar.dc.dsw1.domain.Cliente;
 
 @SuppressWarnings("unchecked")
 public interface IClienteDAO extends CrudRepository<Cliente, Long> {
+
+	Cliente findByUsuarioEmail(String email);
 	
 	Cliente findById(long id);
 

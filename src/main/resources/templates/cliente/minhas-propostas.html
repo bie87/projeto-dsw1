@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Propostas</title>
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; background: #f4f6f8; color: #1f2937; }
+        .topbar { background: #111827; color: #fff; padding: 20px 24px; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+        .actions { display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0 24px; }
+        .actions a { display: inline-block; border: 0; border-radius: 8px; padding: 10px 14px; text-decoration: none; font-size: 14px; cursor: pointer; }
+        .primary { background: #2563eb; color: #fff; }
+        .secondary { background: #e5e7eb; color: #111827; }
+        table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,.06); }
+        th, td { padding: 14px; border-bottom: 1px solid #e5e7eb; text-align: left; }
+        th { background: #f9fafb; }
+        .empty { background: #fff; border-radius: 12px; padding: 18px; box-shadow: 0 8px 24px rgba(0,0,0,.06); }
+    </style>
+</head>
+<body>
+<header class="topbar">
+    <div class="container">
+        <h1>Minhas Propostas</h1>
+        <p th:text="${cliente != null ? 'Propostas do cliente: ' + cliente.nome : 'Suas propostas'}"></p>
+    </div>
+</header>
+
+<main class="container">
+    <div class="actions">
+        <a class="primary" th:href="@{/cliente/home}">Voltar para os carros</a>
+        <a class="secondary" th:href="@{/logout}">Sair</a>
+    </div>
+
+    <section th:if="${propostas == null or #lists.isEmpty(propostas)}" class="empty">
+        Você ainda não fez nenhuma proposta.
+    </section>
+
+    <table th:if="${propostas != null and !#lists.isEmpty(propostas)}">
+        <thead>
+        <tr>
+            <th>Veículo</th>
+            <th>Loja</th>
+            <th>Valor</th>
+            <th>Data</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="proposta : ${propostas}">
+            <td th:text="${proposta.veiculo != null ? proposta.veiculo.modelo : '-'}"></td>
+            <td th:text="${proposta.veiculo != null and proposta.veiculo.loja != null ? proposta.veiculo.loja.nome : '-'}"></td>
+            <td th:text="${proposta.valor}"></td>
+            <td th:text="${proposta.data}"></td>
+            <td th:text="${proposta.status}"></td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>

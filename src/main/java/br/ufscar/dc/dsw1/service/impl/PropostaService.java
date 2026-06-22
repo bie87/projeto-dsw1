@@ -1,15 +1,15 @@
 
-package br.ufscar.dc.dsw.service.impl;
+package br.ufscar.dc.dsw1.service.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.ufscar.dc.dsw.dao.IPropostaDAO;
-import br.ufscar.dc.dsw.domain.Proposta;
-import br.ufscar.dc.dsw.enums.StatusProposta;
-import br.ufscar.dc.dsw.service.spec.IPropostaService;
+import br.ufscar.dc.dsw1.dao.IPropostaDAO;
+import br.ufscar.dc.dsw1.domain.Proposta;
+import br.ufscar.dc.dsw1.enums.StatusProposta;
+import br.ufscar.dc.dsw1.service.spec.IPropostaService;
 
 @Service
 public class PropostaService implements IPropostaService {
@@ -33,22 +33,22 @@ public class PropostaService implements IPropostaService {
     }
 
     @Override
-    public List<Proposta> buscarTodos() {
+    public Iterable<Proposta> buscarTodos() {
         return dao.findAll();
     }
 
     @Override
-    public List<Proposta> buscarPorCliente(Long clienteId) {
+    public Iterable<Proposta> buscarPorCliente(Long clienteId) {
         return dao.findByClienteId(clienteId);
     }
 
     @Override
-    public List<Proposta> buscarPorVeiculo(Long veiculoId) {
+    public Iterable<Proposta> buscarPorVeiculo(Long veiculoId) {
         return dao.findByVeiculoId(veiculoId);
     }
 
     @Override
-    public List<Proposta> buscarPorStatus(StatusProposta status) {
+    public Iterable<Proposta> buscarPorStatus(StatusProposta status) {
         return dao.findByStatus(status);
     }
 }

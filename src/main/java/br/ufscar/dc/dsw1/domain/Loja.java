@@ -3,6 +3,7 @@ package br.ufscar.dc.dsw1.domain;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -38,7 +39,7 @@ public class Loja extends AbstractEntity<Long> {
 	@OneToMany(mappedBy = "loja")
     private List<Veiculo> veiculos;
 
-    @OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
@@ -58,12 +59,28 @@ public class Loja extends AbstractEntity<Long> {
 		this.nome = nome;
 	}
 
-	public List<Veiculo> getVeiculos() {
-		return Veiculos;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setClientes(List<Veiculos> Veiculos) {
-		this.Veiculos = Veiculos;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public List<Veiculo> getVeiculos() {
+		return veiculos;
+	}
+
+	public void setVeiculos(List<Veiculo> veiculos) {
+		this.veiculos = veiculos;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }
