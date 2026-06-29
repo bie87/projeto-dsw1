@@ -13,4 +13,7 @@ public interface IPropostaDAO extends CrudRepository<Proposta, Long> {
     Iterable<Proposta> findByVeiculoId(Long id);
 
     Iterable<Proposta> findByStatus(StatusProposta status);
+
+    Iterable<Proposta> findByLojaId(Long Id);
+
 }

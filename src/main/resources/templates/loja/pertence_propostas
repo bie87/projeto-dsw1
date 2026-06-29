@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Sistema de Veículos</title>
+    <title>Propostas Pendentes - Área da Loja</title>
     <style>
         body {
             margin: 0;
@@ -52,22 +52,6 @@
             color: #111827;
         }
 
-        .search {
-            background: #fff;
-            padding: 16px;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-            margin-bottom: 24px;
-        }
-
-        input {
-            width: min(100%, 320px);
-            padding: 10px 12px;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            margin-right: 8px;
-        }
-
         table {
             width: 100%;
             border-collapse: collapse;
@@ -93,48 +77,61 @@
             padding: 18px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
         }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            background: #fef3c7;
+            color: #92400e;
+        }
     </style>
 </head>
 <body>
 <header class="topbar">
     <div class="container">
-        <h1>Veículos Disponíveis</h1>
-        <p>Esta é a página inicial do sistema.</p>
+        <h1 th:text="'Propostas de ' + ${loja.nome}">Propostas Pendentes</h1>
+        <p>Gerencie as propostas enviadas pelos clientes interessados nos seus veículos.</p>
     </div>
 </header>
 
 <main class="container">
+    
     <div class="actions">
-        <a class="primary" th:href="@{/login}">Fazer login</a>
+        <a class="secondary" th:href="@{/loja/home}">Home Loja</a>
+        <a class="secondary" th:href="@{/loja/veiculos/cadastrar}">Cadastro de Veículo</a>
+        <a class="secondary" th:href="@{/loja/veiculos}">Veículos da Loja</a>
+        <a class="primary" th:href="@{/loja/propostas}">Propostas Pendentes</a>
+        <a class="secondary" th:href="@{/logout}">Sair</a>
     </div>
 
-    <section class="search">
-        <form th:action="@{/home}" method="get">
-            <label for="modelo">Filtrar por modelo</label><br><br>
-            <input type="text" id="modelo" name="modelo" placeholder="Digite o modelo">
-            <button class="secondary" type="submit">Filtrar</button>
-        </form>
+    <section th:if="${propostas == null or #lists.isEmpty(propostas)}" class="empty">
+        Nenhuma proposta foi recebida por sua loja até o momento.
     </section>
 
-    <section th:if="${veiculos == null or #lists.isEmpty(veiculos)}" class="empty">
-        Nenhum veículo cadastrado no momento.
-    </section>
-
-    <table th:if="${veiculos != null and !#lists.isEmpty(veiculos)}">
+    <table th:if="${propostas != null and !#lists.isEmpty(propostas)}">
         <thead>
         <tr>
-            <th>Modelo</th>
-            <th>Ano</th>
-            <th>Preço</th>
-            <th>Loja</th>
+            <th>ID</th>
+            <th>Veículo</th>
+            <th>Placa</th>
+            <th>Valor Proposto</th>
+            <th>Data</th>
+            <th>Status</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="veiculo : ${veiculos}">
-            <td th:text="${veiculo.modelo}"></td>
-            <td th:text="${veiculo.ano}"></td>
-            <td th:text="${veiculo.preco}"></td>
-            <td th:text="${veiculo.loja != null ? veiculo.loja.nome : '-'}"></td>
+        <tr th:each="proposta : ${propostas}">
+            <td th:text="${proposta.id}"></td>
+            <td th:text="${proposta.veiculo != null ? proposta.veiculo.nome : 'Não especificado'}"></td>
+            <td th:text="${proposta.veiculo != null ? proposta.veiculo.placa : '-'}"></td>
+            <td th:text="'R$ ' + ${#numbers.formatDecimal(proposta.valor, 1, 'POINT', 2, 'COMMA')}"></td>
+            <td th:text="${proposta.data}"></td>
+            <td>
+                <span class="badge" th:text="${proposta.status}">ABERTO</span>
+            </td>
         </tr>
         </tbody>
     </table>

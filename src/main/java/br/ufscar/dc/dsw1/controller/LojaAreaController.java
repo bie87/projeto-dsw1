@@ -24,79 +24,85 @@ import br.ufscar.dc.dsw1.service.spec.IVeiculoService;
 @RequestMapping("/loja")
 public class LojaAreaController {
 
-	private IVeiculoService veiculoService() {
-		return SpringContext.getBean(IVeiculoService.class);
-	}
+    private IVeiculoService veiculoService() {
+        return SpringContext.getBean(IVeiculoService.class);
+    }
 
-	private ILojaDAO lojaDAO() {
-		return SpringContext.getBean(ILojaDAO.class);
-	}
+    private ILojaDAO lojaDAO() {
+        return SpringContext.getBean(ILojaDAO.class);
+    }
 
-	private IPropostaService propostaService() {
-		return SpringContext.getBean(IPropostaService.class);
-	}
+    private IPropostaService propostaService() {
+        return SpringContext.getBean(IPropostaService.class);
+    }
 
-	private Loja lojaLogada(Principal principal) {
-		Loja loja = lojaDAO().findByUsuarioEmail(principal.getName());
-		if (loja == null) {
-			throw new IllegalStateException("Loja não encontrada para o usuário autenticado");
-		}
-		return loja;
-	}
+    private Loja lojaLogada(Principal principal) {
+        Loja loja = lojaDAO().findByUsuarioEmail(principal.getName());
+        if (loja == null) {
+            throw new IllegalStateException("Loja não encontrada para o usuário autenticado");
+        }
+        return loja;
+    }
 
-	@GetMapping("/home")
-	public String home(@RequestParam(required = false) String modelo,
-					   Principal principal,
-					   Model model) {
-		Loja loja = lojaLogada(principal);
+    @GetMapping("/home")
+    public String home(@RequestParam(required = false) String modelo,
+                       Principal principal,
+                       Model model) {
+        Loja loja = lojaLogada(principal);
 
-		if (modelo != null && !modelo.isBlank()) {
-			model.addAttribute("veiculos", veiculoService().buscarPorModelo(modelo));
-		} else {
-			model.addAttribute("veiculos", veiculoService().buscarTodos());
-		}
+        if (modelo != null && !modelo.isBlank()) {
+            model.addAttribute("veiculos", veiculoService().buscarPorModelo(modelo));
+        } else {
+            model.addAttribute("veiculos", veiculoService().buscarTodos());
+        }
 
-		model.addAttribute("loja", loja);
-		return "loja/home";
-	}
+        model.addAttribute("loja", loja);
+        return "loja/home";
+    }
+
+
+  
+    @GetMapping("/veiculos/cadastrar")
+    public String cadastrarVeiculoForm(Principal principal, Model model) {
+        Loja loja = lojaLogada(principal);
+        
+        model.addAttribute("loja", loja);
+        model.addAttribute("veiculo", new Veiculo());
+        return "loja/cadastro_veiculo"; 
+    }
+
+
+    @PostMapping("/veiculos")
+    public String salvarVeiculo(Veiculo veiculo, Principal principal) {
+        Loja loja = lojaLogada(principal);
+        
+
+        veiculo.setLoja(loja); 
+        veiculoService().salvar(veiculo); 
+        
+        return "redirect:/loja/home";
+    }
+
+    
+    @GetMapping("/veiculos")
+    public String meusVeiculos(Principal principal, Model model) {
+        Loja loja = lojaLogada(principal);
+        
+  
+        model.addAttribute("veiculos", veiculoService().buscarPorLoja(loja.getId())); 
+        model.addAttribute("loja", loja);
+        
+        return "loja/pertence_veiculos";
+    }
+
+
+    @GetMapping("/propostas")
+    public String minhasPropostas(Principal principal, Model model) {
+        Loja loja = lojaLogada(principal);
+        
+        model.addAttribute("propostas", propostaService().buscarPorLoja(loja.getId()));
+        model.addAttribute("loja", loja);
+        
+        return "loja/pertence_propostas";
+    }
 }
-/*
-	@GetMapping("/propostas/nova/{veiculoId}")
-	public String novaProposta(@PathVariable Long veiculoId,
-							  Principal principal,
-							  Model model) {
-		Loja loja = lojaLogada(principal);
-		Veiculo veiculo = veiculoService().buscarPorId(veiculoId);
-
-		model.addAttribute("loja", loja);
-		model.addAttribute("veiculo", veiculo);
-		model.addAttribute("proposta", new Proposta());
-		return "loja/proposta";
-	}
-
-@PostMapping("/propostas/salvar")
-	public String salvarProposta(@RequestParam Long veiculoId,
-								 @RequestParam Double valor,
-								 Principal principal) {
-		Loja loja = lojaLogada(principal);
-		Veiculo veiculo = veiculoService().buscarPorId(veiculoId);
-
-		Proposta proposta = new Proposta();
-		proposta.setLoja(loja);
-		proposta.setVeiculo(veiculo);
-		proposta.setValor(valor);
-		proposta.setData(LocalDate.now());
-		proposta.setStatus(StatusProposta.ABERTO);
-		propostaService().salvar(proposta);
-
-		return "redirect:/loja/propostas/minhas";
-	}
-
-	@GetMapping("/propostas/minhas")
-	public String minhasPropostas(Principal principal, Model model) {
-		Loja loja = lojaLogada(principal);
-		model.addAttribute("propostas", propostaService().buscarPorLoja(loja.getId()));
-		model.addAttribute("loja", loja);
-		return "loja/minhas-propostas";
-	}
-}*/

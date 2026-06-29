@@ -39,6 +39,11 @@ public class Veiculo extends AbstractEntity<Long> {
 	@Column(nullable = false, columnDefinition = "DECIMAL(8,2) DEFAULT 0.0")
 	private BigDecimal preco;
 
+	  @ManyToOne
+   @JoinColumn(name = "loja_id")
+    private Loja loja;
+
+	
 	public String getNome() {
 		return nome;
 	}
@@ -94,7 +99,5 @@ public class Veiculo extends AbstractEntity<Long> {
 		this.loja = loja;
 	}
 
-   @ManyToOne
-   @JoinColumn(name = "loja_id")
-    private Loja loja; 
+ 
 }

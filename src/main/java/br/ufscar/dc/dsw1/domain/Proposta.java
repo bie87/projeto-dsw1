@@ -33,6 +33,10 @@ public class Proposta extends AbstractEntity<Long> {
     @JoinColumn(name = "veiculo_id")
     private Veiculo veiculo;
 
+    @ManyToOne
+   @JoinColumn(name = "loja_id")
+    private Loja loja; 
+
     public Double getValor() {
         return valor;
     }
@@ -63,5 +67,10 @@ public class Proposta extends AbstractEntity<Long> {
     public void setVeiculo(Veiculo veiculo) {
         this.veiculo = veiculo;
     }
-    
+    public Loja getLoja() {
+        return loja;
+    }   
+    public void setLoja(Loja loja) {
+        this.loja = loja;
+    }
 }

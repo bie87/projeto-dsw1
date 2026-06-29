@@ -1,7 +1,6 @@
 
 package br.ufscar.dc.dsw1.service.impl;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,6 +49,10 @@ public class PropostaService implements IPropostaService {
     @Override
     public Iterable<Proposta> buscarPorStatus(StatusProposta status) {
         return dao.findByStatus(status);
+    }
+    @Override
+    public Iterable<Proposta> buscarPorLoja(Long lojaid) {
+        return dao.findByLojaId(lojaid);
     }
 }
 

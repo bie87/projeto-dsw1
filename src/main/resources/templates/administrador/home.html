@@ -104,40 +104,13 @@
 </header>
 
 <main class="container">
+    
     <div class="actions">
-        <a class="primary" th:href="@{/login}">Fazer login</a>
+        <a class="secondary" th:href="@{/clientes/cadastrar}">Cadastrar cliente</a>
+        <a class="secondary" th:href="@{/lojas/cadastrar}">Cadastrar loja</a>
     </div>
 
-    <section class="search">
-        <form th:action="@{/home}" method="get">
-            <label for="modelo">Filtrar por modelo</label><br><br>
-            <input type="text" id="modelo" name="modelo" placeholder="Digite o modelo">
-            <button class="secondary" type="submit">Filtrar</button>
-        </form>
-    </section>
-
-    <section th:if="${veiculos == null or #lists.isEmpty(veiculos)}" class="empty">
-        Nenhum veículo cadastrado no momento.
-    </section>
-
-    <table th:if="${veiculos != null and !#lists.isEmpty(veiculos)}">
-        <thead>
-        <tr>
-            <th>Modelo</th>
-            <th>Ano</th>
-            <th>Preço</th>
-            <th>Loja</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="veiculo : ${veiculos}">
-            <td th:text="${veiculo.modelo}"></td>
-            <td th:text="${veiculo.ano}"></td>
-            <td th:text="${veiculo.preco}"></td>
-            <td th:text="${veiculo.loja != null ? veiculo.loja.nome : '-'}"></td>
-        </tr>
-        </tbody>
-    </table>
+    
 </main>
 </body>
 </html>
